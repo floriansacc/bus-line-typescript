@@ -1,38 +1,25 @@
 import { useEffect, useState } from "react";
+import useGetRouteInfoItem from "./hooks/useGetRouteInfoItem";
+import useKakaoMapRestApi from "./hooks/useKakaoMapRestApi";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 export default function App() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    const test: number[] = [0];
-
-    function testt(name: string) {
-      return `Hi ${name}`;
-    }
-
-    const test2 = (name: string[], optional?: number): void => {
-      // return `Hi ${name}`;
-      console.log(`${name}: ${optional ?? 0}`);
-    };
-
-    test2(["dd", "dddd"], 2);
-
-    interface Model1 {
-      data1: number;
-      data2: string[];
-      data3?: number[];
-    }
-
-    const myModel: Model1 = {
-      data1: 1,
-      data2: ["a", "b"],
-      data3: [],
-    };
-  }, []);
+  // const { routeInfo } = useGetRouteInfoItem();
+  // console.log(routeInfo);
+  // const { test } = useKakaoMapRestApi();
 
   return (
-    <div>
-      <div>test</div>
+    <div className="flex h-screen w-screen items-center justify-center">
+      <div className="h-[300px] w-[300px] border border-solid border-black">
+        <Map
+          center={{ lat: 33.5563, lng: 126.79581 }}
+          className="h-full w-full"
+        >
+          <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}>
+            <div style={{ color: "#000" }}>Hello World!</div>
+          </MapMarker>
+        </Map>
+      </div>
     </div>
   );
 }
