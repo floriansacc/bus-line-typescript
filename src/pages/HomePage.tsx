@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import useGetRouteInfoItem from "./hooks/useGetRouteInfoItem";
-import useKakaoMapRestApi from "./hooks/useKakaoMapRestApi";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
+import useKakaoMapRestApi from "../hooks/useKakaoMapRestApi";
 
-export default function App() {
-  // const { routeInfo } = useGetRouteInfoItem();
-  // console.log(routeInfo);
-  // const { test } = useKakaoMapRestApi();
+export default function HomePage() {
+  const { test } = useKakaoMapRestApi();
+
+  // const { routeInfo } = useRouteInfoItem();
+  // const { routePathList } = useGetStationsByRouteList();
+  // const { stationsList } = useStationsByRouteList();
 
   return (
     <div className="flex h-screen w-screen items-center justify-center">
@@ -16,7 +16,7 @@ export default function App() {
           className="h-full w-full"
         >
           <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}>
-            <div style={{ color: "#000" }}>Hello World!</div>
+            <div style={{ color: "#000" }}>Test marker</div>
           </MapMarker>
         </Map>
       </div>

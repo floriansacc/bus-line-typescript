@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const baseUrl: string = "https://dapi.kakao.com/v2/local/search/address.json?";
 
 const basicParams: { [key: string]: string } = {
-  query: "전북 삼성동 100",
+  query: "여의대방로 216",
 };
 
 const urlParams = new URLSearchParams(basicParams);

@@ -1,6 +1,8 @@
+import { MessageHeader, msgHeaderFromJson } from "./msg-header";
+
 export interface RouteInfoItemModel {
   msgHeader: MessageHeader;
-  msgBody: MessageBody;
+  msgBody: MessageBodyRouteInfo;
 }
 
 export const routeInfoItemFromJson = (json: any): RouteInfoItemModel => {
@@ -10,37 +12,23 @@ export const routeInfoItemFromJson = (json: any): RouteInfoItemModel => {
   };
 };
 
-interface MessageHeader {
-  headerMsg: string;
-  headerCd: string;
-  itemCount: number;
+interface MessageBodyRouteInfo {
+  itemList: itemListRouteInfo[];
 }
 
-const msgHeaderFromJson = (json: any): MessageHeader => {
-  return {
-    headerCd: json.headerCd,
-    headerMsg: json.headerMsg,
-    itemCount: json.itemCount,
-  };
-};
-
-interface MessageBody {
-  itemList: itemList[];
-}
-
-const msgBodyFromJson = (json: any): MessageBody => {
+const msgBodyFromJson = (json: any): MessageBodyRouteInfo => {
   return { itemList: itemListFromJsonList(json.itemList) };
 };
 
-interface itemList {
-  busRouteId: string;
+interface itemListRouteInfo {
+  busRouteId: number;
   busRouteNm: string;
-  busRouteAbrv: string;
-  length: string;
-  routeType: string;
+  busRouteAbrv: number;
+  length: number;
+  routeType: number;
   stStationNm: string;
   edStationNm: string;
-  term: string;
+  term: number;
   lastBusYn: string;
   lastBusTm: string;
   firstBusTm: string;
@@ -49,16 +37,16 @@ interface itemList {
   corpNm: string;
 }
 
-const itemListFromJson = (json: any): itemList => {
+const itemListFromJson = (json: any): itemListRouteInfo => {
   return {
-    busRouteId: json.busRouteId,
+    busRouteId: parseInt(json.busRouteId),
     busRouteNm: json.busRouteNm,
-    busRouteAbrv: json.busRouteAbrv,
-    length: json.length,
-    routeType: json.routeType,
+    busRouteAbrv: parseInt(json.busRouteAbrv),
+    length: parseFloat(json.length),
+    routeType: parseInt(json.routeType),
     stStationNm: json.stStationNm,
     edStationNm: json.edStationNm,
-    term: json.term,
+    term: parseInt(json.term),
     lastBusYn: json.lastBusYn,
     lastBusTm: json.lastBusTm,
     firstBusTm: json.firstBusTm,
@@ -68,6 +56,6 @@ const itemListFromJson = (json: any): itemList => {
   };
 };
 
-const itemListFromJsonList = (list: any[]): itemList[] => {
+const itemListFromJsonList = (list: any[]): itemListRouteInfo[] => {
   return list.map((e) => itemListFromJson(e));
 };

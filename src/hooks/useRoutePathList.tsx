@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import {
-  routeInfoItemFromJson,
-  RouteInfoItemModel,
-} from "../models/RouteInfoItem";
+  RoutePathListModel,
+  routePathListModelFromJson,
+} from "../models/bus-api/RoutePathList";
 
 const baseUrl: string =
-  "http://ws.bus.go.kr/api/rest/busRouteInfo/getRouteInfo?";
+  "http://ws.bus.go.kr/api/rest/busRouteInfo/getRoutePath?";
 
 const busLineQuery: number = 100100112;
 
@@ -17,11 +17,13 @@ const basicParams: { [key: string]: string } = {
 
 const urlParams = new URLSearchParams(basicParams);
 
-export default function useGetRouteInfoItem() {
-  const [routeInfo, setRouteInfo] = useState<RouteInfoItemModel | null>(null);
+export default function useRoutePathList() {
+  const [routePathList, setRoutePathList] = useState<RoutePathListModel | null>(
+    null,
+  );
 
   useEffect(() => {
-    const getRouteInfoItem = async (): Promise<void> => {
+    const getRoutePathList = async (): Promise<void> => {
       const fetchUrl = `${baseUrl}${urlParams.toString()}`;
       try {
         const response = await fetch(fetchUrl, {
@@ -35,16 +37,16 @@ export default function useGetRouteInfoItem() {
           throw new Error(`error`);
         }
         const jsonResponse = await response.json();
-        const toReturn: RouteInfoItemModel =
-          routeInfoItemFromJson(jsonResponse);
-        setRouteInfo(toReturn);
+        const toReturn: RoutePathListModel =
+          routePathListModelFromJson(jsonResponse);
+        setRoutePathList(toReturn);
       } catch (error) {
         console.log(error);
       }
     };
 
-    getRouteInfoItem();
+    getRoutePathList();
   }, []);
 
-  return { routeInfo };
+  return { routePathList };
 }
