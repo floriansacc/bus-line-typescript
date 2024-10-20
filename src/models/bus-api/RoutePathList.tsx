@@ -13,16 +13,16 @@ export const routePathListModelFromJson = (json: any): RoutePathListModel => {
 };
 
 interface MessageBodyRoutePathList {
-  msgBody: ItemListRoutePathList[];
+  itemList: ItemListRoutePathList[];
 }
 
 const messageBodyRoutePathListfromJson = (
   json: any,
 ): MessageBodyRoutePathList => {
-  return { msgBody: itemListRoutePathListFromJsonList(json.itemList) };
+  return { itemList: itemListRoutePathListFromJsonList(json.itemList) };
 };
 
-interface ItemListRoutePathList {
+export interface ItemListRoutePathList {
   no: number;
   gpsX: number;
   gpsY: number;

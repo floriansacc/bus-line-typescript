@@ -40,6 +40,13 @@ export default function useRoutePathList() {
         const toReturn: RoutePathListModel =
           routePathListModelFromJson(jsonResponse);
         setRoutePathList(toReturn);
+
+        // const docRef = await setDoc(
+        //   doc(db, "RoutePathList", busLineQuery.toString()),
+        //   toReturn,
+        // );
+
+        // console.log(docRef);
       } catch (error) {
         console.log(error);
       }

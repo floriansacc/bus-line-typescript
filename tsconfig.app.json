@@ -22,5 +22,5 @@
 
     "types": ["kakao.maps.d.ts"]
   },
-  "include": ["src"]
+  "include": ["src", "firebase.tsx"]
 }
